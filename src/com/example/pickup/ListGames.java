@@ -1,12 +1,19 @@
 package com.example.pickup;
 
+import java.util.Date;
 import java.util.List;
+
+import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,23 +68,27 @@ public class ListGames extends ListFragment {
 					ParseQuery<Game> query = ParseQuery.getQuery(Game.class);
 			        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 			        
-					List<Game> results;
 					switch (mListType)
 					{
 						case MainActivity.NEARBY:
-							results = query.find(); 
+							
+							LocationManager locMgr = ((LocationManager) MainActivity.mContext.getSystemService(MainActivity.mContext.LOCATION_SERVICE));
+					        Location location = locMgr.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+							ParseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+					        
+							query.whereWithinMiles("location", point, 10.0);
 					        break;
 						case MainActivity.UPCOMING:
-							results = query.find(); 
+							Date date = new Date();
+							query.whereGreaterThanOrEqualTo("date", date);
+							query.orderByAscending("date");
 							break;
 						case MainActivity.MYGAMES:
-							results = query.find(); 
-							break;
-						default:
-							results = query.find(); 
+							query.whereEqualTo("host", ParseUser.getCurrentUser());
 							break;
 					}
 					
+					List<Game> results = query.find(); 
 					for (Game event : results)
 		            {
 		                Log.d("ListEvent", "Found event: id = " + event.getId());

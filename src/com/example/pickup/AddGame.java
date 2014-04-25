@@ -280,12 +280,7 @@ public class AddGame extends Fragment {
 			{
 				Toast.makeText(MainActivity.mContext, "Event created.", Toast.LENGTH_SHORT).show();
 				
-//				Start Event Detail with id of new event
-//				Intent intent = new Intent(MainActivity.mContext, EventDetail.class);
-//				intent.putExtra("id", mEvent.getId());
-//				startActivity(intent);
-//				getActivity().getFragmentManager().popBackStack();
-//				
+
 				Bundle bundle = new Bundle();
 				bundle.putString("id", mEvent.getId());
 				Fragment gameFragment = new GameDetail();
