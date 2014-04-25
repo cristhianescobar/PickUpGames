@@ -9,11 +9,13 @@
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-      	android:textSize="24sp" >
+      	android:textSize="24sp" 
+      	android:textColor="@color/gray">
     </TextView>
     
     <TextView
         android:id="@+id/itemDate"
+        android:textColor="@color/gray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
       	android:textSize="12sp" >

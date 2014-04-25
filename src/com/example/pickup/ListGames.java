@@ -1,9 +1,8 @@
 package com.example.pickup;
 
 import java.util.List;
-
 import com.parse.ParseQuery;
-
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ListFragment;
@@ -21,6 +20,7 @@ public class ListGames extends ListFragment {
 	
 	private View view;
 	private static GameArrayAdapter mAdapter;
+	private int mListType;
 	
 	
 	@Override 
@@ -29,16 +29,8 @@ public class ListGames extends ListFragment {
 		
 		mAdapter = new GameArrayAdapter(MainActivity.mContext.getApplicationContext());
         
-		
-        int id = 0;
-//         getArguments().getInt("id");
-        
-		switch (id)
-		{
-			case 0:
-		        new getEvents().execute();
-		        break;
-		}
+        mListType = getArguments().getInt("listType");
+		new getEvents().execute();
 		
 		return view;
 	}
@@ -69,7 +61,23 @@ public class ListGames extends ListFragment {
 					ParseQuery<Game> query = ParseQuery.getQuery(Game.class);
 			        query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 			        
-					List<Game> results = query.find();
+					List<Game> results;
+					switch (mListType)
+					{
+						case MainActivity.NEARBY:
+							results = query.find(); 
+					        break;
+						case MainActivity.UPCOMING:
+							results = query.find(); 
+							break;
+						case MainActivity.MYGAMES:
+							results = query.find(); 
+							break;
+						default:
+							results = query.find(); 
+							break;
+					}
+					
 					for (Game event : results)
 		            {
 		                Log.d("ListEvent", "Found event: id = " + event.getId());

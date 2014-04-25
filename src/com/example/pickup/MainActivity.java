@@ -32,6 +32,10 @@ public class MainActivity extends Activity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private String CLASS = "MainActivity";
+    public final static int NEARBY = 0;
+    public final static int UPCOMING = 1;
+    public final static int MYGAMES = 2;
+    
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -80,15 +84,24 @@ public class MainActivity extends Activity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
     	Fragment frag = null;
+    	Bundle bundle = new Bundle();
+    	
+    	
     	switch(position){
     		case 0:
+    			bundle.putInt("listType", NEARBY);
     			frag = new ListGames();
+    			frag.setArguments(bundle);
     			break;
     		case 1:
+    			bundle.putInt("listType", UPCOMING);
     			frag = new ListGames();
+    			frag.setArguments(bundle);
     			break;
     		case 2:
+    			bundle.putInt("listType", MYGAMES);
     			frag = new ListGames();
+    			frag.setArguments(bundle);
     			break;
     		case 3:
     			frag = new AddGame();
