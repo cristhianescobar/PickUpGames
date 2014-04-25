@@ -17,5 +17,5 @@ build/
 *ipr
 *iws
 settings.gradle
-libs/*
+ libs/*
 project.properties
