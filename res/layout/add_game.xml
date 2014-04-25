@@ -94,13 +94,12 @@
 			android:orientation="horizontal"
 			android:padding="5dp"
 			android:gravity="center">
-			<fragment
+			<FrameLayout
 			    android:id="@+id/location_map"
 				android:layout_width="wrap_content"
 				android:layout_height="300dp"
 				android:layout_marginLeft="20dp"
-				android:layout_marginRight="20dp"
-				class="com.google.android.gms.maps.MapFragment" />
+				android:layout_marginRight="20dp"/>
 		</LinearLayout>
 		<LinearLayout
 		    android:layout_width="fill_parent"

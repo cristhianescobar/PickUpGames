@@ -135,6 +135,7 @@ public class MainActivity extends Activity
     	{
     		signOut(null);
     	}
+    	
     }
 
     public void onSectionAttached(int number) {

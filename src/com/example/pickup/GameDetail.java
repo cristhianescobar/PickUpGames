@@ -16,6 +16,7 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,6 +39,7 @@ public class GameDetail extends Fragment {
 	private static List<ParseObject> mGuests;
 	private ProgressDialog mDialog;
 	private View view;
+	private GoogleMap map;
 	
 	@Override 
 	public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle bundle){
@@ -45,6 +47,14 @@ public class GameDetail extends Fragment {
 		view.findViewById(R.id.delete_button).setOnClickListener((OnClickListener) deleteEvent);
 		view.findViewById(R.id.attend_button).setOnClickListener((OnClickListener) attendEvent);
 		mUser = ParseUser.getCurrentUser();
+		
+		// Setup Map
+		Fragment mapFrag = MapFragment.newInstance();
+		map = ((MapFragment) mapFrag).getMap();
+		FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.location_map, mapFrag)
+                .commit();
     	
     	Button delete = ((Button) view.findViewById(R.id.delete_button));
 		Button attend = ((Button) view.findViewById(R.id.attend_button));
@@ -86,7 +96,6 @@ public class GameDetail extends Fragment {
 			((TextView) view.findViewById(R.id.attending_value)).setText(getAttending());
 			
 			// Setup Map
-			GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map_details)).getMap();
 			map.getUiSettings().setScrollGesturesEnabled(false);
 			map.addMarker(new MarkerOptions().position(location));
 	        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));

@@ -14,6 +14,7 @@ import com.parse.ParseUser;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -49,10 +50,20 @@ public class AddGame extends Fragment {
 	private View view;
 	private GoogleMap map;
 	
+//	private MapFragment mFrag;
+	
 	@Override 
-	public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle bundle){
-		view = inflator.inflate(R.layout.add_game,container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle)
+	{
+		view = inflater.inflate(R.layout.add_game,container, false);
 		view.findViewById(R.id.submit_button).setOnClickListener((OnClickListener) submit);
+		
+		Fragment mapFrag = MapFragment.newInstance();
+		map = ((MapFragment) mapFrag).getMap();
+		FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.location_map, mapFrag)
+                .commit();
 	
 		mUser = ParseUser.getCurrentUser();
 		if (mUser == null)
@@ -72,7 +83,7 @@ public class AddGame extends Fragment {
 	        LatLng address = new LatLng(location.getLatitude(), location.getLongitude());
 	        
 	        // Setup map
-			GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
+	        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
 			map.getUiSettings().setScrollGesturesEnabled(false);
 			map.addMarker(new MarkerOptions().position(address));
 	        map.moveCamera(CameraUpdateFactory.newLatLngZoom(address, 16));
@@ -81,6 +92,7 @@ public class AddGame extends Fragment {
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			Log.e("AddEvent", "Display Map: " + e.toString());
 			Toast.makeText(MainActivity.mContext, "Error loading maps.", Toast.LENGTH_SHORT).show();
 			
@@ -288,7 +300,6 @@ public class AddGame extends Fragment {
 				
 				FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction()
-		        		.addToBackStack(null)
 		                .replace(R.id.container, gameFragment)
 		                .commit();
 		        
@@ -305,7 +316,37 @@ public class AddGame extends Fragment {
 				submit.setClickable(true);
 			}
 			
-		}
+		}	
     }
+	
+//	public void onStart()
+//	{
+//		super.onStart();
+//		mFrag.onStart();
+//	}
+//	
+//	public void onResume()
+//	{
+//		super.onResume();
+//		mFrag.onResume();
+//	}
+//	
+//	public void onStop()
+//	{
+//		super.onStop();
+//		mFrag.onStop();
+//	}
+//	
+//	public void onPause()
+//	{
+//		super.onPause();
+//		mFrag.onPause();
+//	}
+//	
+//	public void onDestroyView()
+//	{
+//		super.onDestroyView();
+//		mFrag.onDestroyView();
+//	}
 }
 
