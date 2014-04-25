@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"PickUp "</string>
+    <string name="nearby_games">Nearby Games</string>
+    <string name="upcoming_games">Upcoming Games </string>
+    <string name="my_games">My Games</string>
+    
+    <string name="new_game">New Game</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Labels -->
+    <string name="attending_label"><b>Attending:</b></string>
+    <string name="confirm_label"><b>Confirm:</b></string>
+    <string name="date_label"><b>Date:</b></string>
+    <string name="details_label"><b>Details:</b></string>
+    <string name="email_label"><b>Email:</b></string>
+    <string name="host_label"><b>Host:</b></string>
+    <string name="location_label"><b>Location:</b></string>
+    <string name="name_label"><b>Name:</b></string>
+    <string name="password_label"><b>Password:</b></string>
+    <string name="phone_label"><b>Phone:</b></string>
+    <string name="sport_label"><b>Sport:</b></string>
+    <string name="time_label"><b>Time:</b></string>
+    <string name="attend">Attend</string>
+    <string name="delete">Delete</string>
+    
+    <!-- Other -->
+    <string name="current_location">Current Location</string>
+    <string name="sign_up_text">Name will be your public handle.  Email will remain private, used only for logging in.</string>
+    
+</resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:paddingTop="@dimen/scroll_padding"
+	android:paddingBottom="@dimen/scroll_padding" >
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp" >
+		<TextView
+		    android:id="@+id/name_label"
+		    style="@style/label"
+		    android:text="@string/name_label" />
+		<EditText
+			android:id="@+id/name_value"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:inputType="textCapWords"
+			android:layout_marginRight="@dimen/value_padding" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp" >
+		<TextView
+			android:id="@+id/email_label"
+			android:text="@string/email_label"
+			style="@style/label" />
+		<EditText
+			android:id="@+id/email_value"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:inputType="textEmailAddress"
+			android:layout_marginRight="@dimen/value_padding" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp" >
+		<TextView
+			android:id="@+id/phone_label"
+			android:text="@string/phone_label"
+			style="@style/label" />
+		<EditText
+			android:id="@+id/phone_value"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:inputType="phone"
+			android:layout_marginRight="@dimen/value_padding" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp" >
+		<TextView
+			android:id="@+id/password_label"
+			android:text="@string/password_label"
+			style="@style/label" />
+		<EditText
+			android:id="@+id/password_value"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:inputType="textPassword"
+			android:layout_marginRight="@dimen/value_padding" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp" >
+		<TextView
+			android:id="@+id/confirm_label"
+			android:text="@string/confirm_label"
+			style="@style/label" />
+		<EditText
+			android:id="@+id/confirm_value"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:inputType="textPassword"
+			android:layout_marginRight="@dimen/value_padding" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp"
+		android:gravity="center" >
+		<Button
+			android:id="@+id/submit_button"
+			android:text="@string/sign_up"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/burnt_button"
+			style="@style/button_text" />
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="5dp" >
+		<TextView
+		    android:id="@+id/sign_up_text"
+		    android:text="@string/sign_up_text" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="10dp"
+			android:gravity="center" />
+	</LinearLayout>
+</LinearLayout>
