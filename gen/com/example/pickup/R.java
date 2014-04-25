@@ -240,14 +240,14 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001f;
     }
     public static final class id {
-        public static final int action_example=0x7f05002a;
-        public static final int action_settings=0x7f050029;
+        public static final int action_example=0x7f05002b;
+        public static final int action_settings=0x7f05002a;
         public static final int attend_button=0x7f05001e;
         public static final int attending_label=0x7f05001c;
         public static final int attending_value=0x7f05001d;
         public static final int button1=0x7f050005;
-        public static final int confirm_label=0x7f050026;
-        public static final int confirm_value=0x7f050027;
+        public static final int confirm_label=0x7f050027;
+        public static final int confirm_value=0x7f050028;
         public static final int container=0x7f050007;
         public static final int date_label=0x7f05000b;
         public static final int date_value=0x7f05000c;
@@ -255,13 +255,13 @@ containing a value of this type.
         public static final int details_label=0x7f050014;
         public static final int details_value=0x7f050015;
         public static final int drawer_layout=0x7f050006;
-        public static final int email_label=0x7f050022;
-        public static final int email_value=0x7f050023;
+        public static final int email_label=0x7f050023;
+        public static final int email_value=0x7f050024;
         public static final int host_label=0x7f050018;
         public static final int host_value=0x7f050019;
         public static final int hybrid=0x7f050004;
-        public static final int itemDate=0x7f050021;
-        public static final int itemName=0x7f050020;
+        public static final int itemDate=0x7f050022;
+        public static final int itemName=0x7f050021;
         public static final int location_label=0x7f050011;
         public static final int location_map=0x7f050013;
         public static final int location_map_details=0x7f050017;
@@ -271,18 +271,19 @@ containing a value of this type.
         public static final int navigation_drawer=0x7f050008;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int password_label=0x7f050024;
-        public static final int password_value=0x7f050025;
+        public static final int password_label=0x7f050025;
+        public static final int password_value=0x7f050026;
         public static final int phone_label=0x7f05001a;
         public static final int phone_value=0x7f05001b;
         public static final int satellite=0x7f050002;
-        public static final int sign_up_text=0x7f050028;
+        public static final int sign_up_text=0x7f050029;
         public static final int sport_label=0x7f05000f;
         public static final int sport_value=0x7f050010;
         public static final int submit_button=0x7f050016;
         public static final int terrain=0x7f050003;
         public static final int time_label=0x7f05000d;
         public static final int time_value=0x7f05000e;
+        public static final int welcome=0x7f050020;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;

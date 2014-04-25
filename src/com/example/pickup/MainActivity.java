@@ -127,6 +127,7 @@ public class MainActivity extends Activity
     	{
 	        FragmentManager fragmentManager = getFragmentManager();
 	        fragmentManager.beginTransaction()
+	        		.addToBackStack(null)
 	                .replace(R.id.container, frag)
 	                .commit();
     	}

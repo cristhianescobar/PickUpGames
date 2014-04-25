@@ -1,6 +1,8 @@
 package com.example.pickup;
 
 
+import com.parse.ParseUser;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -98,6 +100,41 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+        
+        ArrayAdapter<String> adapter;
+//        if (ParseUser.getCurrentUser() != null)
+//        {
+//        	adapter =  new ArrayAdapter<String>(
+//                    getActionBar().getThemedContext(),
+//                    android.R.layout.simple_list_item_activated_1,
+//                    android.R.id.text1,
+//                    new String[]{
+//                            getString(R.string.nearby_games),
+//                            getString(R.string.upcoming_games),
+//                            getString(R.string.my_games),
+//                            getString(R.string.new_game),
+//                            getString(R.string.sign_out),
+//                            getString(R.string.settings),
+//                            getString(R.string.about),
+//                    });
+//        }
+//        else
+//        {
+//        	adapter =  new ArrayAdapter<String>(
+//                    getActionBar().getThemedContext(),
+//                    android.R.layout.simple_list_item_activated_1,
+//                    android.R.id.text1,
+//                    new String[]{
+//                            getString(R.string.nearby_games),
+//                            getString(R.string.upcoming_games),
+//                            getString(R.string.sign_in),
+//                            getString(R.string.sign_up),
+//                            getString(R.string.settings),
+//                            getString(R.string.about),
+//                    });
+//        }
+        
+        
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,

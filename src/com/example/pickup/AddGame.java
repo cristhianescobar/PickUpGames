@@ -288,8 +288,11 @@ public class AddGame extends Fragment {
 				
 				FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction()
+		        		.addToBackStack(null)
 		                .replace(R.id.container, gameFragment)
 		                .commit();
+		        
+		        getActivity().getFragmentManager().popBackStack();
 				
 				
 			}

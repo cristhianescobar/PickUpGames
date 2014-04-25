@@ -54,6 +54,7 @@ public class ListGames extends ListFragment {
 			
 			FragmentManager fragmentManager = getFragmentManager();
 	        fragmentManager.beginTransaction()
+	        		.addToBackStack(null)
 	                .replace(R.id.container, gameFragment)
 	                .commit();
 	    }
