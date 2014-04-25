@@ -33,6 +33,7 @@
         android:name="com.example.pickup.NavigationDrawerFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
-        android:layout_gravity="start" />
+        android:layout_gravity="start"
+        android:background="@color/gray" />
 
 </android.support.v4.widget.DrawerLayout>

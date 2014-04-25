@@ -82,13 +82,13 @@ public class MainActivity extends Activity
     	Fragment frag = null;
     	switch(position){
     		case 0:
-    			frag = new NearByGames();
+    			frag = new ListGames();
     			break;
     		case 1:
-    			frag = new UpComingGames();
+    			frag = new ListGames();
     			break;
     		case 2:
-    			frag = new MyGames();
+    			frag = new ListGames();
     			break;
     		case 3:
     			frag = new AddGame();

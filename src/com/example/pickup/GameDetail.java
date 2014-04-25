@@ -17,8 +17,6 @@ import com.parse.ParseUser;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -28,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +42,8 @@ public class GameDetail extends Fragment {
 	@Override 
 	public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle bundle){
 		view = inflator.inflate(R.layout.game_detail,container, false);
+		view.findViewById(R.id.delete_button).setOnClickListener((OnClickListener) deleteEvent);
+		view.findViewById(R.id.attend_button).setOnClickListener((OnClickListener) attendEvent);
 		mUser = ParseUser.getCurrentUser();
     	
     	Button delete = ((Button) view.findViewById(R.id.delete_button));
@@ -85,7 +86,7 @@ public class GameDetail extends Fragment {
 			((TextView) view.findViewById(R.id.attending_value)).setText(getAttending());
 			
 			// Setup Map
-			GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
+			GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map_details)).getMap();
 			map.getUiSettings().setScrollGesturesEnabled(false);
 			map.addMarker(new MarkerOptions().position(location));
 	        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
@@ -121,6 +122,8 @@ public class GameDetail extends Fragment {
 			Toast.makeText(MainActivity.mContext.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
+	
+
 	
 	// Gets a list of the guests' names
 	private String getAttending()
@@ -163,67 +166,80 @@ public class GameDetail extends Fragment {
 		}
 	}
 	
-	// Called by Attend Button
-	public void attendEvent(View v)
-	{
-		if ((mUser == null) || (mUser.getObjectId().equals(mEvent.getHost().getObjectId())))
+	
+	
+	View.OnClickListener attendEvent = new View.OnClickListener()
+	{	
+		@Override
+		public void onClick(View v)
 		{
-			Log.wtf("EventDetail", "attendEvent: User is host or null");
-			assert(false);
-		}
-		
-		ParseRelation<ParseUser> relation = mEvent.getRelation("guests");
-		relation.add(mUser);
-		
-		// Start Dialog
-		mDialog = new ProgressDialog(MainActivity.mContext);
-		mDialog.setMessage("Loading data...");
-		mDialog.setIndeterminate(true);
-		mDialog.setCancelable(false);
-		mDialog.show();
-		
-		Button attend = ((Button) view.findViewById(R.id.attend_button));
-		try
-		{
-			attend.setVisibility(View.GONE);
-			
-			mEvent.save();
-			
-			// Load Data in AsyncTask
-			new loadData().execute();
-		}
-		catch (ParseException e)
-		{
-			if (mDialog != null)
+			if ((mUser == null) || (mUser.getObjectId().equals(mEvent.getHost().getObjectId())))
 			{
-				mDialog.dismiss();
+				Log.wtf("EventDetail", "attendEvent: User is host or null");
+				assert(false);
 			}
 			
-			attend.setVisibility(View.VISIBLE);
+			ParseRelation<ParseUser> relation = mEvent.getRelation("guests");
+			relation.add(mUser);
 			
-			Log.e("EventDetail", "loadData: " + e.toString());
-			String msg = "";
-			switch (e.getCode())
-        	{
-        		case 100:
-        		case 120:
-        			msg = "Check network connection.";
-        			break;
-        		default:
-        			msg = "An unknown problem has occured (" + e.getCode() + ").";
-        			break;
-        	}
-			Toast.makeText(MainActivity.mContext, msg, Toast.LENGTH_SHORT).show();
+			// Start Dialog
+			mDialog = new ProgressDialog(MainActivity.mContext);
+			mDialog.setMessage("Loading data...");
+			mDialog.setIndeterminate(true);
+			mDialog.setCancelable(false);
+			mDialog.show();
+			
+			Button attend = ((Button) view.findViewById(R.id.attend_button));
+			try
+			{
+				attend.setVisibility(View.GONE);
+				
+				mEvent.save();
+				
+				// Load Data in AsyncTask
+				new loadData().execute();
+			}
+			catch (ParseException e)
+			{
+				if (mDialog != null)
+				{
+					mDialog.dismiss();
+				}
+				
+				attend.setVisibility(View.VISIBLE);
+				
+				Log.e("EventDetail", "loadData: " + e.toString());
+				String msg = "";
+				switch (e.getCode())
+	        	{
+	        		case 100:
+	        		case 120:
+	        			msg = "Check network connection.";
+	        			break;
+	        		default:
+	        			msg = "An unknown problem has occured (" + e.getCode() + ").";
+	        			break;
+	        	}
+				Toast.makeText(MainActivity.mContext, msg, Toast.LENGTH_SHORT).show();
+			}
+			
 		}
-	}
+	};
 	
-	// Called by Delete Button
-	public void deleteEvent(View v)
-	{
-		mEvent.deleteInBackground();
-		Toast.makeText(MainActivity.mContext.getApplicationContext(), "Event deleted.", Toast.LENGTH_SHORT).show();
-		getActivity().getFragmentManager().popBackStack();
-	}
+
+	
+	View.OnClickListener deleteEvent = new View.OnClickListener()
+	{	
+		@Override
+		public void onClick(View v)
+		{
+			mEvent.deleteInBackground();
+			Toast.makeText(MainActivity.mContext.getApplicationContext(), "Event deleted.", Toast.LENGTH_SHORT).show();
+			getActivity().getFragmentManager().popBackStack();
+		}
+	};
+	
+
 	
 	// Saves Event in AsyncTask
 	private class loadData extends AsyncTask<Void, Void, Void>
@@ -234,13 +250,12 @@ public class GameDetail extends Fragment {
 		{
 	        try
 	        {	        	
-//	        	Intent intent = getIntent();
-//	    		String objectId = intent.getStringExtra("id");
-//	    		Log.d("EventDetail", "Details for event " + objectId);
+	    		String objectId = getArguments().getString("id");
+	    		Log.d("Game Detail", "Details for game " + objectId);
 	    		
 	        	ParseQuery<Game> eventQuery = ParseQuery.getQuery(Game.class);
 	            eventQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-	    		mEvent = (Game) eventQuery.get(null);
+	    		mEvent = (Game) eventQuery.get(objectId);
 	    		
 	    		ParseQuery<ParseObject> guestQuery = mEvent.getRelation("guests").getQuery();
 	    		guestQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);

@@ -47,6 +47,7 @@ public class AddGame extends Fragment {
 	private static LatLng mLocation;
 	private static ProgressDialog mDialog;
 	private View view;
+	private GoogleMap map;
 	
 	@Override 
 	public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle bundle){
@@ -142,7 +143,7 @@ public class AddGame extends Fragment {
     		Address address = geocoder.getFromLocationName(location.getText().toString(), 1).get(0);
     		mLocation = new LatLng(address.getLatitude(), address.getLongitude());
 
-    		GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
+    		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
     		map.clear();
     		map.addMarker(new MarkerOptions().position(mLocation));
     		map.moveCamera(CameraUpdateFactory.newLatLngZoom(mLocation, 16));
@@ -239,6 +240,8 @@ public class AddGame extends Fragment {
 		}
 	};
 	
+
+	
 	// Saves Event in AsyncTask
 	private class saveEvent extends AsyncTask<Void, Void, Void>
     {
@@ -282,9 +285,15 @@ public class AddGame extends Fragment {
 //				intent.putExtra("id", mEvent.getId());
 //				startActivity(intent);
 //				getActivity().getFragmentManager().popBackStack();
+//				
+				Bundle bundle = new Bundle();
+				bundle.putString("id", mEvent.getId());
+				Fragment gameFragment = new GameDetail();
+				gameFragment.setArguments(bundle);
+				
 				FragmentManager fragmentManager = getFragmentManager();
 		        fragmentManager.beginTransaction()
-		                .replace(R.id.container, new GameDetail())
+		                .replace(R.id.container, gameFragment)
 		                .commit();
 				
 				

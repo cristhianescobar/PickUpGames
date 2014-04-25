@@ -90,7 +90,7 @@
 	        android:padding="5dp"
 		    android:gravity="center" >
 			<fragment
-			    android:id="@+id/location_map"
+			    android:id="@+id/location_map_details"
 			    android:layout_width="wrap_content"
 			    android:layout_height="300dp"
 		        android:layout_marginLeft="20dp"
@@ -168,7 +168,6 @@
 		        android:text="@string/attend"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:onClick="attendEvent"
 		        android:background="@drawable/burnt_button"
 		        style="@style/button_text" />
 	    </LinearLayout>
@@ -183,7 +182,6 @@
 		        android:text="@string/delete"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:onClick="deleteEvent"
 		        android:background="@drawable/burnt_button"
 		        style="@style/button_text" />
 	    </LinearLayout>
