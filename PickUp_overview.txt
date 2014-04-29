@@ -1,0 +1,24 @@
+Pick Up Overview
+
+1. The team members names and uteids if there are 2 or 3 people on the project
+ 
+ 	Cristhian Escobar (cje466)
+ 	Doug Goldstein (ddg625)
+ 	Neal Bhattarai (nb5968)
+
+2. A list of features / use cases you completed
+
+
+3. A list of features / use cases from your application prototype 
+	(assignment 3) that you did not completed
+
+
+4. A list of features / use cases you added that were not part of 
+	the application prototype
+
+
+5. A list of the classes and major chunks of code you obtained 
+	from other sources including the source. (URL and title / description)
+
+
+6. A list of the classes and major chunks of code you completed yourself
