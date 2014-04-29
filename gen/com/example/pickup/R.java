@@ -240,49 +240,49 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001f;
     }
     public static final class id {
-        public static final int action_example=0x7f05002a;
-        public static final int action_settings=0x7f050029;
-        public static final int attend_button=0x7f05001d;
-        public static final int attending_label=0x7f05001b;
-        public static final int attending_value=0x7f05001c;
-        public static final int button1=0x7f050005;
-        public static final int confirm_label=0x7f050026;
-        public static final int confirm_value=0x7f050027;
-        public static final int container=0x7f050007;
-        public static final int date_label=0x7f05000b;
-        public static final int date_value=0x7f05000c;
-        public static final int delete_button=0x7f05001e;
-        public static final int details_label=0x7f050014;
-        public static final int details_value=0x7f050015;
-        public static final int drawer_layout=0x7f050006;
-        public static final int email_label=0x7f050022;
-        public static final int email_value=0x7f050023;
-        public static final int host_label=0x7f050017;
-        public static final int host_value=0x7f050018;
+        public static final int about=0x7f050006;
+        public static final int attend_button=0x7f05001e;
+        public static final int attending_label=0x7f05001c;
+        public static final int attending_value=0x7f05001d;
+        public static final int button1=0x7f050023;
+        public static final int confirm_label=0x7f050028;
+        public static final int confirm_value=0x7f050029;
+        public static final int container=0x7f050008;
+        public static final int date_label=0x7f05000c;
+        public static final int date_value=0x7f05000d;
+        public static final int delete_button=0x7f05001f;
+        public static final int details_label=0x7f050015;
+        public static final int details_value=0x7f050016;
+        public static final int drawer_layout=0x7f050007;
+        public static final int email_label=0x7f050024;
+        public static final int email_value=0x7f050025;
+        public static final int host_label=0x7f050018;
+        public static final int host_value=0x7f050019;
         public static final int hybrid=0x7f050004;
-        public static final int itemDate=0x7f050021;
-        public static final int itemName=0x7f050020;
-        public static final int location_label=0x7f050011;
-        public static final int location_map=0x7f050013;
-        public static final int location_value=0x7f050012;
-        public static final int name_label=0x7f050009;
-        public static final int name_value=0x7f05000a;
-        public static final int navigation_drawer=0x7f050008;
+        public static final int itemDate=0x7f050022;
+        public static final int itemName=0x7f050021;
+        public static final int location_label=0x7f050012;
+        public static final int location_map=0x7f050014;
+        public static final int location_value=0x7f050013;
+        public static final int logo=0x7f050005;
+        public static final int name_label=0x7f05000a;
+        public static final int name_value=0x7f05000b;
+        public static final int navigation_drawer=0x7f050009;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int password_label=0x7f050024;
-        public static final int password_value=0x7f050025;
-        public static final int phone_label=0x7f050019;
-        public static final int phone_value=0x7f05001a;
+        public static final int password_label=0x7f050026;
+        public static final int password_value=0x7f050027;
+        public static final int phone_label=0x7f05001a;
+        public static final int phone_value=0x7f05001b;
         public static final int satellite=0x7f050002;
-        public static final int sign_up_text=0x7f050028;
-        public static final int sport_label=0x7f05000f;
-        public static final int sport_value=0x7f050010;
-        public static final int submit_button=0x7f050016;
+        public static final int sign_up_text=0x7f05002a;
+        public static final int sport_label=0x7f050010;
+        public static final int sport_value=0x7f050011;
+        public static final int submit_button=0x7f050017;
         public static final int terrain=0x7f050003;
-        public static final int time_label=0x7f05000d;
-        public static final int time_value=0x7f05000e;
-        public static final int welcome=0x7f05001f;
+        public static final int time_label=0x7f05000e;
+        public static final int time_value=0x7f05000f;
+        public static final int welcome=0x7f050020;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -298,17 +298,10 @@ containing a value of this type.
         public static final int list_item=0x7f030007;
         public static final int settings=0x7f030008;
         public static final int sign_in=0x7f030009;
-        public static final int sign_out=0x7f03000a;
-        public static final int sign_up=0x7f03000b;
-    }
-    public static final class menu {
-        public static final int global=0x7f0a0000;
-        public static final int main=0x7f0a0001;
+        public static final int sign_up=0x7f03000a;
     }
     public static final class string {
-        public static final int about=0x7f060024;
-        public static final int action_example=0x7f060027;
-        public static final int action_settings=0x7f060028;
+        public static final int about=0x7f060025;
         public static final int app_name=0x7f06001b;
         public static final int attend=0x7f060035;
         /**  Labels 
@@ -416,27 +409,29 @@ containing a value of this type.
         public static final int delete=0x7f060036;
         public static final int details_label=0x7f06002c;
         public static final int email_label=0x7f06002d;
+        public static final int game_details=0x7f060026;
+        public static final int home=0x7f06001c;
         public static final int host_label=0x7f06002e;
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f06001a;
         public static final int location_label=0x7f06002f;
-        public static final int my_games=0x7f06001e;
+        public static final int my_games=0x7f06001f;
         public static final int name_label=0x7f060030;
-        public static final int navigation_drawer_close=0x7f060026;
-        public static final int navigation_drawer_open=0x7f060025;
-        public static final int nearby_games=0x7f06001c;
-        public static final int new_game=0x7f06001f;
+        public static final int navigation_drawer_close=0x7f060028;
+        public static final int navigation_drawer_open=0x7f060027;
+        public static final int nearby_games=0x7f06001d;
+        public static final int new_game=0x7f060020;
         public static final int password_label=0x7f060031;
         public static final int phone_label=0x7f060032;
-        public static final int settings=0x7f060023;
-        public static final int sign_in=0x7f060020;
-        public static final int sign_out=0x7f060021;
-        public static final int sign_up=0x7f060022;
+        public static final int settings=0x7f060024;
+        public static final int sign_in=0x7f060021;
+        public static final int sign_out=0x7f060022;
+        public static final int sign_up=0x7f060023;
         public static final int sign_up_text=0x7f060038;
         public static final int sport_label=0x7f060033;
         public static final int time_label=0x7f060034;
-        public static final int upcoming_games=0x7f06001d;
+        public static final int upcoming_games=0x7f06001e;
     }
     public static final class style {
         /** 
@@ -465,8 +460,11 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
+        public static final int Theme_SelectDate=0x7f090005;
+        public static final int Widget_EditText_White=0x7f090006;
         public static final int button_text=0x7f090002;
         public static final int label=0x7f090003;
+        public static final int value=0x7f090004;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.

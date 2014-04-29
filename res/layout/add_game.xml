@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_height="fill_parent"
+    android:background="@color/gray">
 	<LinearLayout
 	    android:orientation="vertical"
 		android:layout_width="fill_parent"
@@ -19,10 +20,8 @@
 				style="@style/label" />
 			<EditText
 			    android:id="@+id/name_value"
-			    android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
 				android:inputType="textCapWords|textAutoCorrect"
-				android:layout_marginRight="@dimen/value_padding" />
+				style="@style/value" />
 		</LinearLayout>
 		<LinearLayout
 		    android:layout_width="fill_parent"
@@ -66,10 +65,8 @@
 				style="@style/label" />
 			<EditText
 			    android:id="@+id/sport_value"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
 				android:inputType="textCapWords|textAutoCorrect"
-				android:layout_marginRight="@dimen/value_padding" />
+				style="@style/value" />
 		</LinearLayout>
 		<LinearLayout
 		    android:layout_width="fill_parent"
@@ -82,11 +79,8 @@
 				style="@style/label" />
 			<EditText
 			    android:id="@+id/location_value"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
 				android:inputType="textCapWords|textPostalAddress|textAutoCorrect"
-				android:layout_marginRight="@dimen/value_padding"
-				android:hint="@string/current_location" />
+				style="@style/value" />
 		</LinearLayout>
 		<LinearLayout
 		    android:layout_width="fill_parent"
@@ -94,12 +88,13 @@
 			android:orientation="horizontal"
 			android:padding="5dp"
 			android:gravity="center">
-			<FrameLayout
+			<fragment
 			    android:id="@+id/location_map"
-				android:layout_width="wrap_content"
-				android:layout_height="300dp"
-				android:layout_marginLeft="20dp"
-				android:layout_marginRight="20dp"/>
+			    android:layout_width="wrap_content"
+			    android:layout_height="300dp"
+		        android:layout_marginLeft="20dp"
+		        android:layout_marginRight="20dp"
+			    class="com.google.android.gms.maps.MapFragment" />
 		</LinearLayout>
 		<LinearLayout
 		    android:layout_width="fill_parent"
@@ -112,10 +107,8 @@
 				style="@style/label" />
 			<EditText
 			    android:id="@+id/details_value"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
 				android:inputType="textCapSentences|textMultiLine|textAutoCorrect"
-				android:layout_marginRight="@dimen/value_padding" />
+				style="@style/value" />
 		</LinearLayout>
 		<LinearLayout
 		    android:layout_width="fill_parent"
@@ -125,6 +118,7 @@
 			android:gravity="center">
 			<Button
 			    android:id="@+id/submit_button"
+			    android:onClick="submit"
 			    android:text="@string/new_game"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

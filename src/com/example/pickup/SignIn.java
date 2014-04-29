@@ -3,9 +3,11 @@ package com.example.pickup;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,9 +53,9 @@ public class SignIn extends Fragment {
 				InputMethodManager imm = (InputMethodManager) MainActivity.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(submit.getWindowToken(), 0);
 				
-				// Set label to black
-				email_label.setTextColor(Color.BLACK);
-				password_label.setTextColor(Color.BLACK);
+				// Set label to white
+				email_label.setTextColor(Color.WHITE);
+				password_label.setTextColor(Color.WHITE);
 				
 				String email = email_value.getText().toString();
 				String password = password_value.getText().toString();
@@ -133,7 +135,10 @@ public class SignIn extends Fragment {
 			
 			if (msg.isEmpty())
 			{
-				getActivity().getFragmentManager().popBackStack();
+				Activity activity = getActivity();
+				Intent intent = new Intent(activity, MainActivity.class);
+				startActivity(intent);
+				activity.finish();
 			}
 			else
 			{

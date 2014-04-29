@@ -4,7 +4,6 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -45,13 +44,9 @@ public class MainActivity extends Activity
     public static Context mContext;
     
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mContext = this;
-        
-        Log.d("MainActivity", "Parse init ="+parseInit);
+    protected void onCreate(Bundle savedInstanceState)
+    {
+    	Log.d("MainActivity", "Parse init ="+parseInit);
         if (!parseInit)
 		{
 			Log.d("MainActivity", "Initializing Parse");
@@ -63,6 +58,11 @@ public class MainActivity extends Activity
 	        parseInit = true;
 		}
         
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mContext = this;
+        
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -71,9 +71,7 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        
-        
-        
+
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, new Home())
@@ -86,89 +84,96 @@ public class MainActivity extends Activity
     	Fragment frag = null;
     	Bundle bundle = new Bundle();
     	
-    	
-    	switch(position){
+    	if (ParseUser.getCurrentUser() != null)
+    	{
+    		// Signed In
+    		switch (position)
+    		{
     		case 0:
+    			mTitle = getString(R.string.app_name);
+    			frag = new Home();
+    			break;
+    		case 1:
+                mTitle = getString(R.string.nearby_games);
     			bundle.putInt("listType", NEARBY);
     			frag = new ListGames();
     			frag.setArguments(bundle);
     			break;
-    		case 1:
+    		case 2:
+                mTitle = getString(R.string.upcoming_games);
     			bundle.putInt("listType", UPCOMING);
     			frag = new ListGames();
     			frag.setArguments(bundle);
     			break;
-    		case 2:
+    		case 3:
+                mTitle = getString(R.string.my_games);
     			bundle.putInt("listType", MYGAMES);
     			frag = new ListGames();
     			frag.setArguments(bundle);
     			break;
-    		case 3:
-    			frag = new AddGame();
-    			break;
     		case 4:
-    			frag = new SignIn();
-    			break;
+                mTitle = getString(R.string.new_game);
+                Intent intent = new Intent(mContext, AddGame.class);
+				startActivity(intent);
+    			return;
     		case 5:
-    			frag = new SignUp();
-    			break;
+                mTitle = getString(R.string.sign_out);
+                signOut(null);
+                return;
     		case 6:
-    			frag = null;
-    			break;
-    		case 7:
+                mTitle = getString(R.string.settings);
     			frag = new Settings();
     			break;
-    		case 8:
+    		case 7:
+                mTitle = getString(R.string.about);
     			frag = new About();
     			break;
-    		
-    	}
-    	if (frag != null)
-    	{
-	        FragmentManager fragmentManager = getFragmentManager();
-	        fragmentManager.beginTransaction()
-	        		.addToBackStack(null)
-	                .replace(R.id.container, frag)
-	                .commit();
+    		}
     	}
     	else
     	{
-    		signOut(null);
+    		// Not Signed In
+			switch(position)
+			{
+    		case 0:
+    			mTitle = getString(R.string.app_name);
+    			frag = new Home();
+    			break;
+			case 1:
+                mTitle = getString(R.string.nearby_games);
+    			bundle.putInt("listType", NEARBY);
+    			frag = new ListGames();
+    			frag.setArguments(bundle);
+    			break;
+    		case 2:
+                mTitle = getString(R.string.upcoming_games);
+    			bundle.putInt("listType", UPCOMING);
+    			frag = new ListGames();
+    			frag.setArguments(bundle);
+    			break;
+    		case 3:
+                mTitle = getString(R.string.sign_in);
+    			frag = new SignIn();
+    			break;
+    		case 4:
+                mTitle = getString(R.string.sign_up);
+    			frag = new SignUp();
+    			break;
+    		case 5:
+                mTitle = getString(R.string.settings);
+    			frag = new Settings();
+    			break;
+    		case 6:
+                mTitle = getString(R.string.about);
+    			frag = new About();
+    			break;
+			}
     	}
     	
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.nearby_games);
-                break;
-            case 2:
-                mTitle = getString(R.string.upcoming_games);
-                break;
-            case 3:
-                mTitle = getString(R.string.my_games);
-                break;
-            case 4:
-                mTitle = getString(R.string.new_game);
-                break;
-            case 5:
-                mTitle = getString(R.string.sign_in);
-                break;
-            case 6:
-                mTitle = getString(R.string.sign_up);
-                break;
-            case 7:
-                mTitle = getString(R.string.sign_out);
-                break;
-            case 8:
-                mTitle = getString(R.string.settings);
-                break;
-            case 9:
-                mTitle = getString(R.string.about);
-                break;
-            
-        }
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, frag)
+                .commit();
     }
 
     public void restoreActionBar() {
@@ -185,7 +190,6 @@ public class MainActivity extends Activity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
             restoreActionBar();
             return true;
         }
@@ -198,9 +202,6 @@ public class MainActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
     

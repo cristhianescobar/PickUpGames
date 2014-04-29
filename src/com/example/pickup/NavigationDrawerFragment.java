@@ -90,60 +90,51 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mDrawerListView = (ListView) inflater.inflate( R.layout.fragment_navigation_drawer, container, false);
+        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 selectItem(position);
             }
         });
         
-//        String[] listString = null;
-//        if (ParseUser.getCurrentUser() != null)
-//        {
-//        	listString = new String[]
-//        	{
-//                getString(R.string.nearby_games),
-//                getString(R.string.upcoming_games),
-//                getString(R.string.my_games),
-//                getString(R.string.new_game),
-//                getString(R.string.sign_out),
-//                getString(R.string.settings),
-//                getString(R.string.about)
-//        	};
-//        }
-//    	else
-//    	{
-//            listString = new String[]
-//            {
-//                            getString(R.string.nearby_games),
-//                            getString(R.string.upcoming_games),
-//                            getString(R.string.sign_in),
-//                            getString(R.string.sign_up),
-//                            getString(R.string.settings),
-//                            getString(R.string.about)
-//            };
-//    	}
-        
-        
+        String[] listString = null;
+        if (ParseUser.getCurrentUser() != null)
+        {
+        	listString = new String[]
+        	{
+                getString(R.string.home),
+                getString(R.string.nearby_games),
+                getString(R.string.upcoming_games),
+                getString(R.string.my_games),
+                getString(R.string.new_game),
+                getString(R.string.sign_out),
+                getString(R.string.settings),
+                getString(R.string.about)
+        	};
+        }
+    	else
+    	{
+            listString = new String[]
+            {
+            	getString(R.string.home),
+                getString(R.string.nearby_games),
+                getString(R.string.upcoming_games),
+                getString(R.string.sign_in),
+                getString(R.string.sign_up),
+                getString(R.string.settings),
+                getString(R.string.about)
+            };
+    	}
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.nearby_games),
-                        getString(R.string.upcoming_games),
-                        getString(R.string.my_games),
-                        getString(R.string.new_game),
-                        getString(R.string.sign_in),
-                        getString(R.string.sign_up),
-                        getString(R.string.sign_out),
-                        getString(R.string.settings),
-                        getString(R.string.about),
-                }));
+                listString));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -275,8 +266,8 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the drawer is open, show the global app actions in the action bar. See also
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        if (mDrawerLayout != null && isDrawerOpen()) {
-            inflater.inflate(R.menu.global, menu);
+        if (mDrawerLayout != null && isDrawerOpen())
+        {
             showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
@@ -285,11 +276,6 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
 

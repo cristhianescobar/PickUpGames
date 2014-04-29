@@ -7,10 +7,8 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ListFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
@@ -28,11 +26,19 @@ public class ListGames extends ListFragment {
 	private View view;
 	private static GameArrayAdapter mAdapter;
 	private int mListType;
+	private ProgressDialog mDialog;
 	
 	
 	@Override 
 	public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle bundle){
 		view = inflator.inflate(R.layout.list_games,container, false);
+		
+		// Start Dialog
+		mDialog = new ProgressDialog(MainActivity.mContext);
+		mDialog.setMessage("Finding Games...");
+		mDialog.setIndeterminate(true);
+		mDialog.setCancelable(false);
+		mDialog.show();
 		
 		mAdapter = new GameArrayAdapter(MainActivity.mContext.getApplicationContext());
         
@@ -45,22 +51,17 @@ public class ListGames extends ListFragment {
 	 @Override
 	    public void onListItemClick(ListView l, View v, int position, long id)
 	    {
-	    	Game event = (Game) mAdapter.getItem(position);
+		 	Game event = (Game) mAdapter.getItem(position);
 	    	
-	    	Bundle bundle = new Bundle();
-			bundle.putString("id", event.getId());
-			Fragment gameFragment = new GameDetail();
-			gameFragment.setArguments(bundle);
+	    	Intent intent = new Intent(MainActivity.mContext, GameDetail.class);
+			intent.putExtra("id", event.getId());
 			
-			FragmentManager fragmentManager = getFragmentManager();
-	        fragmentManager.beginTransaction()
-	        		.addToBackStack(null)
-	                .replace(R.id.container, gameFragment)
-	                .commit();
+			startActivity(intent);
 	    }
 	    
 	    private class getEvents extends AsyncTask<Void, Void, Void>
 	    {
+	    	String msg = "";
 			@Override
 			protected Void doInBackground(Void... params)
 			{
@@ -99,14 +100,26 @@ public class ListGames extends ListFragment {
 		        catch (Exception e)
 		        {
 		        	Log.e("ListEvents", "Get Events: " + e.toString());
-					Toast.makeText(MainActivity.mContext.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		        	msg = e.getMessage();
 				}
 				return null;
 			}
 			
 			protected void onPostExecute (Void result)
 			{
-				setListAdapter(mAdapter);
+				if (mDialog != null)
+				{
+					mDialog.dismiss();
+				}
+				
+				if (msg.isEmpty())
+				{
+					setListAdapter(mAdapter);
+				}
+				else
+				{
+					Toast.makeText(MainActivity.mContext, msg, Toast.LENGTH_SHORT).show();
+				}
 			}
 	    }
 	} 

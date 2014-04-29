@@ -2,12 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:gravity="center_horizontal"
+    android:background="@color/gray">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About" />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_margin="20dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher" />
 
+    <TextView
+        android:id="@+id/about"
+        android:textSize="18sp"
+      	android:textColor="@color/white"
+        android:text="Welcome to PickUp the app.  This app is meant to ease the pressure of finding enough people to play sports. Feel free to explore the existing games, or sign up and create your own.  Most of all, enjoy the app and have fun.\n\nCreated by:\nDoug Goldstein,\nCristhian Escobar,\nNeal Bhattarai"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

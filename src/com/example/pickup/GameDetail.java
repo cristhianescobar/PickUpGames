@@ -1,8 +1,19 @@
 package com.example.pickup;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,54 +26,35 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.telephony.PhoneNumberUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-public class GameDetail extends Fragment {
-
+public class GameDetail extends Activity
+{
 	private static Game mEvent;
 	private static ParseUser mUser;
 	private static List<ParseObject> mGuests;
-	private ProgressDialog mDialog;
-	private View view;
-	private GoogleMap map;
+	private static Context mContext;
+	private static ProgressDialog mDialog;
 	
-	@Override 
-	public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle bundle){
-		view = inflator.inflate(R.layout.game_detail,container, false);
-		view.findViewById(R.id.delete_button).setOnClickListener((OnClickListener) deleteEvent);
-		view.findViewById(R.id.attend_button).setOnClickListener((OnClickListener) attendEvent);
-		mUser = ParseUser.getCurrentUser();
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.game_detail);
+
+		mContext = this;
 		
-		// Setup Map
-		Fragment mapFrag = MapFragment.newInstance();
-		map = ((MapFragment) mapFrag).getMap();
-		FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.location_map, mapFrag)
-                .commit();
+    	mUser = ParseUser.getCurrentUser();
     	
-    	Button delete = ((Button) view.findViewById(R.id.delete_button));
-		Button attend = ((Button) view.findViewById(R.id.attend_button));
+    	Button delete = ((Button) findViewById(R.id.delete_button));
+		Button attend = ((Button) findViewById(R.id.attend_button));
 		attend.setVisibility(View.GONE);
 		delete.setVisibility(View.GONE);
 		
 		// Start Dialog
-		mDialog = new ProgressDialog(MainActivity.mContext);
+		mDialog = new ProgressDialog(mContext);
 		mDialog.setMessage("Loading data...");
 		mDialog.setIndeterminate(true);
 		mDialog.setCancelable(false);
@@ -70,11 +62,7 @@ public class GameDetail extends Fragment {
 		
 		// Load Data in AsyncTask
 		new loadData().execute();
-
-		
-		return view;
 	}
-	
 	
 	private void displayData()
 	{
@@ -85,24 +73,33 @@ public class GameDetail extends Fragment {
 			LatLng location = mEvent.getLocation();
 			
 			// Display Data
-			((TextView) view.findViewById(R.id.name_value)).setText(mEvent.getName());
-			((TextView) view.findViewById(R.id.date_value)).setText(DateTimeParser.date(date));
-			((TextView) view.findViewById(R.id.time_value)).setText(DateTimeParser.time(date));
-			((TextView) view.findViewById(R.id.sport_value)).setText(mEvent.getSport());
-			((TextView) view.findViewById(R.id.location_value)).setText(parseAddress(location));
-			((TextView) view.findViewById(R.id.details_value)).setText(mEvent.getDetails());
-			((TextView) view.findViewById(R.id.host_value)).setText(host.fetchIfNeeded().getString("name"));
-			((TextView) view.findViewById(R.id.phone_value)).setText(PhoneNumberUtils.formatNumber(host.fetchIfNeeded().getNumber("phone").toString()));
-			((TextView) view.findViewById(R.id.attending_value)).setText(getAttending());
+			((TextView) findViewById(R.id.name_value)).setText(mEvent.getName());
+			((TextView) findViewById(R.id.date_value)).setText(DateTimeParser.date(date));
+			((TextView) findViewById(R.id.time_value)).setText(DateTimeParser.time(date));
+			((TextView) findViewById(R.id.sport_value)).setText(mEvent.getSport());
+			((TextView) findViewById(R.id.location_value)).setText(parseAddress(location));
+			String details = mEvent.getDetails();
+			if (details.isEmpty())
+			{
+				((TextView) findViewById(R.id.details_value)).setText("None");
+			}
+			else
+			{
+				((TextView) findViewById(R.id.details_value)).setText(details);
+			}
+			((TextView) findViewById(R.id.host_value)).setText(host.fetchIfNeeded().getString("name"));
+			((TextView) findViewById(R.id.phone_value)).setText(PhoneNumberUtils.formatNumber(host.fetchIfNeeded().getNumber("phone").toString()));
+			((TextView) findViewById(R.id.attending_value)).setText(getAttending());
 			
 			// Setup Map
+			GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
 			map.getUiSettings().setScrollGesturesEnabled(false);
 			map.addMarker(new MarkerOptions().position(location));
 	        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
 	        
 			// Choose which button(s) to show
-			Button delete = ((Button) view.findViewById(R.id.delete_button));
-			Button attend = ((Button) view.findViewById(R.id.attend_button));
+			Button delete = ((Button) findViewById(R.id.delete_button));
+			Button attend = ((Button) findViewById(R.id.attend_button));
 			if (mUser != null)
 			{
 				if (mUser.getObjectId().equals(host.getObjectId()))
@@ -128,11 +125,9 @@ public class GameDetail extends Fragment {
 		{
 			Log.e("EventDetail", "Display Data: " + e.toString());
 			e.printStackTrace();
-			Toast.makeText(MainActivity.mContext.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
-	
-
 	
 	// Gets a list of the guests' names
 	private String getAttending()
@@ -157,7 +152,7 @@ public class GameDetail extends Fragment {
 	{
 		try
 		{
-			Geocoder geocoder = new Geocoder(MainActivity.mContext.getApplicationContext(), Locale.US);
+			Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.US);
 			Address address = geocoder.getFromLocation(location.latitude, location.longitude,1).get(0);
 			
 			String output = address.getAddressLine(0);
@@ -170,85 +165,72 @@ public class GameDetail extends Fragment {
 		catch (Exception e)
 		{
 			Log.e("EventDetail", "Parse Address: " + e.toString());
-			Toast.makeText(MainActivity.mContext.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			return "Address not found\nLat: " + location.latitude + ", Log: " + location.longitude;
 		}
 	}
 	
-	
-	
-	View.OnClickListener attendEvent = new View.OnClickListener()
-	{	
-		@Override
-		public void onClick(View v)
+	// Called by Attend Button
+	public void attendEvent(View v)
+	{
+		if ((mUser == null) || (mUser.getObjectId().equals(mEvent.getHost().getObjectId())))
 		{
-			if ((mUser == null) || (mUser.getObjectId().equals(mEvent.getHost().getObjectId())))
-			{
-				Log.wtf("EventDetail", "attendEvent: User is host or null");
-				assert(false);
-			}
-			
-			ParseRelation<ParseUser> relation = mEvent.getRelation("guests");
-			relation.add(mUser);
-			
-			// Start Dialog
-			mDialog = new ProgressDialog(MainActivity.mContext);
-			mDialog.setMessage("Loading data...");
-			mDialog.setIndeterminate(true);
-			mDialog.setCancelable(false);
-			mDialog.show();
-			
-			Button attend = ((Button) view.findViewById(R.id.attend_button));
-			try
-			{
-				attend.setVisibility(View.GONE);
-				
-				mEvent.save();
-				
-				// Load Data in AsyncTask
-				new loadData().execute();
-			}
-			catch (ParseException e)
-			{
-				if (mDialog != null)
-				{
-					mDialog.dismiss();
-				}
-				
-				attend.setVisibility(View.VISIBLE);
-				
-				Log.e("EventDetail", "loadData: " + e.toString());
-				String msg = "";
-				switch (e.getCode())
-	        	{
-	        		case 100:
-	        		case 120:
-	        			msg = "Check network connection.";
-	        			break;
-	        		default:
-	        			msg = "An unknown problem has occured (" + e.getCode() + ").";
-	        			break;
-	        	}
-				Toast.makeText(MainActivity.mContext, msg, Toast.LENGTH_SHORT).show();
-			}
-			
+			Log.wtf("EventDetail", "attendEvent: User is host or null");
+			assert(false);
 		}
-	};
-	
-
-	
-	View.OnClickListener deleteEvent = new View.OnClickListener()
-	{	
-		@Override
-		public void onClick(View v)
+		
+		ParseRelation<ParseUser> relation = mEvent.getRelation("guests");
+		relation.add(mUser);
+		
+		// Start Dialog
+		mDialog = new ProgressDialog(mContext);
+		mDialog.setMessage("Loading data...");
+		mDialog.setIndeterminate(true);
+		mDialog.setCancelable(false);
+		mDialog.show();
+		
+		Button attend = ((Button) findViewById(R.id.attend_button));
+		try
 		{
-			mEvent.deleteInBackground();
-			Toast.makeText(MainActivity.mContext.getApplicationContext(), "Event deleted.", Toast.LENGTH_SHORT).show();
-			getActivity().getFragmentManager().popBackStack();
+			attend.setVisibility(View.GONE);
+			
+			mEvent.save();
+			
+			// Load Data in AsyncTask
+			new loadData().execute();
 		}
-	};
+		catch (ParseException e)
+		{
+			if (mDialog != null)
+			{
+				mDialog.dismiss();
+			}
+			
+			attend.setVisibility(View.VISIBLE);
+			
+			Log.e("EventDetail", "loadData: " + e.toString());
+			String msg = "";
+			switch (e.getCode())
+        	{
+        		case 100:
+        		case 120:
+        			msg = "Check network connection.";
+        			break;
+        		default:
+        			msg = "An unknown problem has occured (" + e.getCode() + ").";
+        			break;
+        	}
+			Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+		}
+	}
 	
-
+	// Called by Delete Button
+	public void deleteEvent(View v)
+	{
+		mEvent.deleteInBackground();
+		Toast.makeText(getApplicationContext(), "Event deleted.", Toast.LENGTH_SHORT).show();
+		finish();
+	}
 	
 	// Saves Event in AsyncTask
 	private class loadData extends AsyncTask<Void, Void, Void>
@@ -259,8 +241,9 @@ public class GameDetail extends Fragment {
 		{
 	        try
 	        {	        	
-	    		String objectId = getArguments().getString("id");
-	    		Log.d("Game Detail", "Details for game " + objectId);
+	        	Intent intent = getIntent();
+	    		String objectId = intent.getStringExtra("id");
+	    		Log.d("EventDetail", "Details for event " + objectId);
 	    		
 	        	ParseQuery<Game> eventQuery = ParseQuery.getQuery(Game.class);
 	            eventQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -300,7 +283,7 @@ public class GameDetail extends Fragment {
 			}
 			else
 			{
-				Toast.makeText(MainActivity.mContext, msg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 			}
 			
 		}

@@ -2,21 +2,21 @@
 <resources>
 
     <string name="app_name">"PickUp "</string>
+    
+    <string name="home">Home</string>
     <string name="nearby_games">Nearby Games</string>
     <string name="upcoming_games">Upcoming Games </string>
     <string name="my_games">My Games</string>
-    
     <string name="new_game">New Game</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
     <string name="sign_up">Sign Up</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
+    <string name="game_details">Game Details</string>
     
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
 
     <!-- Labels -->
     <string name="attending_label"><b>Attending:</b></string>

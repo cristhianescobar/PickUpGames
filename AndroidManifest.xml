@@ -32,6 +32,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.pickup.GameDetail"
+            android:label="@string/game_details"
+            android:screenOrientation="portrait"
+	        android:parentActivityName="com.example.pickup.MainActivity" >
+	        <!-- The meta-data element is needed for versions lower than 4.1 -->
+	        <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.example.pickup.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.pickup.AddGame"
+            android:label="@string/new_game"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SelectDate"
+	        android:parentActivityName="com.example.pickup.MainActivity" >
+	        <!-- The meta-data element is needed for versions lower than 4.1 -->
+	        <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.example.pickup.MainActivity" />
+        </activity>
         
          <!-- Meta Data -->
         <meta-data
