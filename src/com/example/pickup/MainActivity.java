@@ -121,9 +121,9 @@ public class MainActivity extends Activity
                 signOut(null);
                 return;
     		case 6:
-                mTitle = getString(R.string.settings);
-    			frag = new Settings();
-    			break;
+//                mTitle = getString(R.string.settings);
+//    			frag = new Settings();
+    			return;
     		case 7:
                 mTitle = getString(R.string.about);
     			frag = new About();
@@ -160,13 +160,14 @@ public class MainActivity extends Activity
     			frag = new SignUp();
     			break;
     		case 5:
-                mTitle = getString(R.string.settings);
-    			frag = new Settings();
-    			break;
+//                mTitle = getString(R.string.settings);
+//    			frag = new Settings();
+    			return;
     		case 6:
                 mTitle = getString(R.string.about);
     			frag = new About();
     			break;
+
 			}
     	}
     	

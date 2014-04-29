@@ -7,18 +7,88 @@ Pick Up Overview
  	Neal Bhattarai (nb5968)
 
 2. A list of features / use cases you completed
-
+	
+	Lets say there are 4 out of 10 Americans that wake up every
+	morning thinking about possible exercising an specific sport. 
+	More then likely that sport will required more then just one 
+	person. It's hard to get people together to play a sport unless you 
+	already a group of people. Now let me introduce you to John Doe he 
+	is one out those 4 American, he is a very athletic person who 
+	enjoys playing a different sport everyday, from basketball, soccer, 
+	to baseball and any other sport you can think of. But he doesn't 
+	know people like him that are interested in different sport all at 
+	once. So this is where our application comes in. PickUp is an 
+	android mobile application that enables people who shared similar 
+	interest to be able to interact with each other. All John has to do 
+	is create an account with PickUp and start attending/creating 
+	pickup games. The way that PickUp games work is you create an new 
+	game, add the game details such as the location, type of sport, 
+	date and time to New Game. After everything is added, you add the 
+	game to the list of events. Now the game info gets send to 
+	somewhere in the cloud (Parse). Now we can take a look at the games 
+	that are going on around you. Swipe to the left and you will see a 
+	menu that enables you to see different types of games. For example, 
+	you can see the list of events going on around you within a 10 mile 
+	radius and everything is listed by distance, shorthest to longest. 
+	Or you can see all the games by clicking on Upcoming games. You can 
+	look at other games and click attend if you would like to attend an 
+	game, in case you are the owner you can also click delete game. So 
+	back to John, through this application he is now able to play the 
+	sport of his choice any given day of the week as long as there are 
+	games going on. He can share that with his peers and soon he will 
+	have a variety of PickUp games to attend. He now lives very happyly 
+	thanks PickUp app. 
 
 3. A list of features / use cases from your application prototype 
 	(assignment 3) that you did not completed
+
+	-The map view of the events was not completed, I think that would of made the app much more user friendly. 
+
+	-Reminder for games users clicked attend 
+
+	I think part of the reason we were not able to finish was because 
+	of the misterious SDK update that ended up affecting the entire 
+	application. Our original design was to heavely on Intentds but 
+	when the new update came up it forces us to switch into using 
+	fragments.  
 
 
 4. A list of features / use cases you added that were not part of 
 	the application prototype
 
+	-We added a beautiful slide in menu, that slides in from the left 
+	or by pressing the top left button. 
+	
+	-We were also able to incorporate exact game locations using google 
+	maps and parse. 
+	
+	-We added a list of games made by each user.
+
 
 5. A list of the classes and major chunks of code you obtained 
-	from other sources including the source. (URL and title / description)
+	from other sources including the source. (URL and title / 
+	description)
 
+	We use the parse tutorial to be able to connect our back end 
+	database and we also looked at a sample listview adapter.
+
+	Parse Integration
+	https://parse.com/apps/quickstart#parse_data/mobile/android/native/
+	new
+
+	ListView Example
+	http://www.vogella.com/tutorials/AndroidListView/article.html
 
 6. A list of the classes and major chunks of code you completed yourself
+
+	We has a group completed the entired source code that we have, we 
+	only looked at the examples online to get an idea of what was 
+	necessary to to implement what we wanted. We decided to make our 
+	source code public and we actually have to version of our code 
+	thanks to the uodate of the sdk. 
+	The source can be found in 
+	https://github.com/cristhianescobar/PickUpGames
+
+	The web ad can be found in the link below
+	http://www.cs.utexas.edu/~nb5968/webad.html
+ 
